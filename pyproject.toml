@@ -1,0 +1,48 @@
+[build-system]
+requires = ["setuptools>=64"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "vit-xray"
+version = "0.1.0"
+description = "Look inside any vision transformer backbone in one command."
+readme = "README.md"
+requires-python = ">=3.10"
+license = "MIT"
+license-files = ["LICENSE"]
+authors = [{ name = "Mike Degany", email = "mike.degany@unt.edu" }]
+keywords = ["vision-transformer", "interpretability", "dinov2", "registers", "artifacts"]
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+]
+dependencies = [
+    "torch",
+    "timm",
+    "numpy",
+    "matplotlib",
+    "pillow",
+    "scikit-learn",
+    "pyyaml",
+    "typer",
+    "rich",
+]
+
+[project.optional-dependencies]
+dev = ["pytest"]
+
+[project.scripts]
+vit-xray = "vit_xray.cli:main"
+
+[tool.setuptools.packages.find]
+include = ["vit_xray*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+# A sourced ROS install puts /opt/ros/... on PYTHONPATH, and its pytest plugins get
+# auto-loaded here and blow up on imports we have nothing to do with. Turn them off so
+# `pytest` works without having to unset PYTHONPATH first.
+addopts = "-p no:launch_testing -p no:launch_ros -p no:ament_lint -p no:ament_flake8 -p no:ament_pep257 -p no:ament_copyright -p no:ament_xmllint"
+markers = [
+    "slow: needs real pretrained weights (deselected unless --runslow is passed)",
+]

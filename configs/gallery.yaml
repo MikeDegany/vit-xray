@@ -1,0 +1,56 @@
+# Regenerates every figure in the README.
+#
+#   vit-xray --gallery configs/gallery.yaml
+#
+# Images are fetched from COCO val2017 on demand and land in assets/, which is gitignored
+# -- only the rendered figures are committed. Chosen for large low-information regions
+# (sky, wall, flat ground), because that is where high-norm artifacts concentrate.
+
+image_url: "http://images.cocodataset.org/val2017/{id}.jpg"
+image_dir: assets
+out_dir: docs
+
+images:
+  cats:     { id: "000000039769", note: "flat pink couch" }
+  skaters:  { id: "000000087038", note: "overcast sky and flat asphalt" }
+  frisbee:  { id: "000000013291", note: "large dusk sky" }
+  bathroom: { id: "000000053505", note: "flat interior walls" }
+
+# Short aliases so the figure specs below stay readable.
+models:
+  dino:        vit_base_patch16_224.dino
+  dinov2-g:    vit_giant_patch14_dinov2.lvd142m
+  dinov2-g+reg: vit_giant_patch14_reg4_dinov2.lvd142m
+  clip:        vit_base_patch16_clip_224.laion2b
+  siglip:      vit_base_patch16_siglip_224.webli
+  deit3:       deit3_base_patch16_224.fb_in22k_ft_in1k
+  mae:         vit_base_patch16_224.mae
+
+figures:
+  # Above the fold: the whole zoo against every image, patch-norm maps only.
+  - name: hero.png
+    type: zoo_grid
+    models: [dino, dinov2-g, dinov2-g+reg, clip, siglip, deit3, mae]
+    images: [cats, skaters, frisbee, bathroom]
+
+  # The controlled result: same architecture, same width, same data, registers the only
+  # difference. Shared colour scale, which is only fair because the widths match.
+  - name: registers.png
+    type: panels
+    models: [dinov2-g, dinov2-g+reg]
+    image: cats
+    norm_scale: shared
+
+  # What a single run actually puts on screen.
+  - name: panels.png
+    type: panels
+    models: [dinov2-g]
+    image: skaters
+    histogram: true
+
+  # Darcet et al. Fig 3: bimodal for a model with artifacts, unimodal for one without.
+  - name: histograms.png
+    type: panels
+    models: [dino, dinov2-g, deit3]
+    image: cats
+    histogram: true

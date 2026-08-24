@@ -1,0 +1,34 @@
+# Generated output
+out/
+out_arch/
+
+# Gallery inputs are downloaded on demand, not committed.
+# Rebuild them with: vit-xray --gallery configs/gallery.yaml
+assets/
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.eggs/
+build/
+dist/
+
+# Environments
+.venv/
+venv/
+env/
+
+# Tooling caches
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.ipynb_checkpoints/
+
+# Editors and OS
+.vscode/
+.idea/
+*.swp
+.DS_Store
+Thumbs.db
+
