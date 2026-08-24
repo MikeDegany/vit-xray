@@ -1,15 +1,8 @@
 <div align="center">
 
-<style>
-@keyframes glass-shine {
-  0% { background-position: 0% 50%; }
-  100% { background-position: 200% 50%; }
-}
-</style>
-
 # 🩻 vit-xray
 
-### **Look inside any vision transformer backbone  <span style="background: linear-gradient(90deg, rgba(8, 15, 34, 0.90) 0%, rgba(14, 165, 233, 0.95) 18%, rgba(255, 255, 255, 0.88) 36%, rgba(34, 197, 94, 0.92) 54%, rgba(168, 85, 247, 0.96) 72%, rgba(255, 255, 255, 0.88) 90%, rgba(8, 15, 34, 0.90) 100%); background-size: 240% 100%; animation: glass-shine 5s linear infinite; color: #ffffff; padding: 0.08em 0.35em; border-radius: 0.35em; box-shadow: inset 0 0 18px rgba(255, 255, 255, 0.18), 0 0 14px rgba(56, 189, 248, 0.30), 0 0 30px rgba(168, 85, 247, 0.24); text-shadow: 0 0 8px rgba(255, 255, 255, 0.5); backdrop-filter: blur(12px);">in one command</span>**
+### **Look inside any vision transformer backbone in one command**
 
 [![Python](https://img.shields.io/badge/python-3.10%2B-3776AB?logo=python&logoColor=white)](https://www.python.org/) [![PyTorch](https://img.shields.io/badge/PyTorch-EE4C2C?logo=pytorch&logoColor=white)](https://pytorch.org/) [![timm](https://img.shields.io/badge/timm-any%20ViT-FFD21E?logo=huggingface&logoColor=black)](https://github.com/huggingface/pytorch-image-models) [![License](https://img.shields.io/badge/license-MIT-22c55e)](LICENSE)
 <!-- [![arXiv](https://img.shields.io/badge/arXiv-2309.16588-b31b1b?logo=arxiv&logoColor=white)](https://arxiv.org/abs/2309.16588) -->
