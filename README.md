@@ -21,6 +21,10 @@ DINO, MAE, and DINOv2-with-registers do not.</sub>
 
 </div>
 
+
+https://github.com/user-attachments/assets/f02d2808-1d5e-46ac-88f1-36eb0c5487a2
+
+
 ---
 
 ## ⚡ Quickstart
