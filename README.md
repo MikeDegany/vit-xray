@@ -44,7 +44,7 @@ vit-xray photo.jpg
 > [!NOTE]
 > On Linux, `pip` pulls the CUDA build of PyTorch by default, which is several GB. On a machine
 > without a GPU, install the CPU build first and `vit-xray` will use it:
-> `pip install torch --index-url https://download.pytorch.org/whl/cpu`
+> `pip install torch torchvision --index-url https://download.pytorch.org/whl/cpu`
 
 For the clearest picture, use the model the figures above lead with:
 
