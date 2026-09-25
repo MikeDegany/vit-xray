@@ -13,8 +13,16 @@ license-files = ["LICENSE"]
 authors = [{ name = "Mike Degany", email = "mike.degany@unt.edu" }]
 keywords = ["vision-transformer", "interpretability", "dinov2", "registers", "artifacts"]
 classifiers = [
+    "Development Status :: 4 - Beta",
+    "Environment :: Console",
+    "Intended Audience :: Science/Research",
+    "Operating System :: OS Independent",
     "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
     "Topic :: Scientific/Engineering :: Artificial Intelligence",
+    "Topic :: Scientific/Engineering :: Image Recognition",
 ]
 dependencies = [
     "torch",
@@ -27,6 +35,11 @@ dependencies = [
     "typer",
     "rich",
 ]
+
+[project.urls]
+Homepage = "https://github.com/MikeDegany/vit-xray"
+Repository = "https://github.com/MikeDegany/vit-xray"
+Issues = "https://github.com/MikeDegany/vit-xray/issues"
 
 [project.optional-dependencies]
 dev = ["pytest"]

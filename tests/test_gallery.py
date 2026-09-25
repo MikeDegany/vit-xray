@@ -52,20 +52,30 @@ def test_required_pairs_covers_every_figure(cfg):
                 assert (alias, img) in pairs
 
 
+RAW = "https://raw.githubusercontent.com/MikeDegany/vit-xray/main/"
+
+
 def test_readme_figures_all_exist(cfg):
-    # The README embeds these; a missing one renders as a broken image on GitHub.
+    # The README embeds these; a missing one renders as a broken image.
     import re
 
     root = CONFIG.resolve().parent.parent
     readme = (root / "README.md").read_text()
 
     # Both spellings: markdown ![](path) and the HTML <img src="path"> the styled README
-    # uses for width control. Skip http(s) -- badges live off-repo.
+    # uses for width control.
     embedded = re.findall(r"!\[[^\]]*\]\(([^)]+)\)", readme)
     embedded += re.findall(r'<img[^>]+src="([^"]+)"', readme)
-    local = [e for e in embedded if not e.startswith("http")]
-    assert local, "no local figures referenced -- did the README lose its images?"
-    for path in local:
+
+    # Figures have to be absolute URLs. PyPI renders the README shipped inside the
+    # package and has nothing to resolve docs/hero.png against, so a relative path
+    # works on GitHub and shows up broken on the PyPI page -- for that release, forever.
+    relative = [e for e in embedded if not e.startswith("http")]
+    assert not relative, f"relative image paths break on PyPI: {relative}"
+
+    ours = [e[len(RAW):] for e in embedded if e.startswith(RAW)]
+    assert ours, "no repo figures referenced -- did the README lose its images?"
+    for path in ours:
         assert (root / path).is_file(), f"README references missing figure {path}"
 
     for fig in cfg["figures"]:

@@ -4,7 +4,7 @@
 
 ### **Look inside any vision transformer backbone in one command**
 
-[![Python](https://img.shields.io/badge/python-3.10%2B-3776AB?logo=python&logoColor=white)](https://www.python.org/) [![PyTorch](https://img.shields.io/badge/PyTorch-EE4C2C?logo=pytorch&logoColor=white)](https://pytorch.org/) [![timm](https://img.shields.io/badge/timm-any%20ViT-FFD21E?logo=huggingface&logoColor=black)](https://github.com/huggingface/pytorch-image-models) [![License](https://img.shields.io/badge/license-MIT-22c55e)](LICENSE)
+[![PyPI](https://img.shields.io/pypi/v/vit-xray?color=3775A9&logo=pypi&logoColor=white)](https://pypi.org/project/vit-xray/) [![Python](https://img.shields.io/badge/python-3.10%2B-3776AB?logo=python&logoColor=white)](https://www.python.org/) [![PyTorch](https://img.shields.io/badge/PyTorch-EE4C2C?logo=pytorch&logoColor=white)](https://pytorch.org/) [![timm](https://img.shields.io/badge/timm-any%20ViT-FFD21E?logo=huggingface&logoColor=black)](https://github.com/huggingface/pytorch-image-models) [![License](https://img.shields.io/badge/license-MIT-22c55e)](https://github.com/MikeDegany/vit-xray/blob/main/LICENSE)
 <!-- [![arXiv](https://img.shields.io/badge/arXiv-2309.16588-b31b1b?logo=arxiv&logoColor=white)](https://arxiv.org/abs/2309.16588) -->
 
 ```bash
@@ -13,7 +13,7 @@ vit-xray photo.jpg
 
 <br>
 
-<img src="docs/hero.png" alt="Patch-token norm maps across seven backbones and four images" width="100%">
+<img src="https://raw.githubusercontent.com/MikeDegany/vit-xray/main/docs/hero.png" alt="Patch-token norm maps across seven backbones and four images" width="100%">
 
 <sub><b>Patch-token norms at the final block, seven pretrained backbones.</b> Most of them quietly repurpose a couple of percent
 of their patch tokens as scratch space; the bright dots, sitting in sky, walls and flat ground.<br>
@@ -26,10 +26,9 @@ DINO, MAE, and DINOv2-with-registers do not.</sub>
 ## ⚡ Quickstart
 
 ```bash
-git clone https://github.com/MikeDegany/vit-xray && cd vit-xray
 conda create -n vitxray python=3.11
 conda activate vitxray
-pip install -e ".[dev]"
+pip install vit-xray
 
 vit-xray photo.jpg
 ```
@@ -37,6 +36,11 @@ vit-xray photo.jpg
 > [!TIP]
 > **No GPU? No problem.** The default backbone is a 329 MB CLIP. The whole command takes about
 > ten seconds on CPU and peaks around 1.5 GB of RAM; it works on a laptop.
+
+> [!NOTE]
+> On Linux, `pip` pulls the CUDA build of PyTorch by default, which is several GB. On a machine
+> without a GPU, install the CPU build first and `vit-xray` will use it:
+> `pip install torch --index-url https://download.pytorch.org/whl/cpu`
 
 For the clearest picture, use the model the figures above lead with:
 
@@ -114,7 +118,7 @@ Same architecture, same width, same training data, one shared colour scale. Regi
 only difference:
 
 <div align="center">
-<img src="docs/registers.png" alt="DINOv2 ViT-g with and without register tokens" width="100%">
+<img src="https://raw.githubusercontent.com/MikeDegany/vit-xray/main/docs/registers.png" alt="DINOv2 ViT-g with and without register tokens" width="100%">
 </div>
 
 > [!NOTE]
@@ -126,7 +130,7 @@ only difference:
 ### 📈 The norm distribution
 
 <div align="center">
-<img src="docs/histograms.png" alt="Token-norm histograms with fitted thresholds" width="100%">
+<img src="https://raw.githubusercontent.com/MikeDegany/vit-xray/main/docs/histograms.png" alt="Token-norm histograms with fitted thresholds" width="100%">
 </div>
 
 A backbone with artifacts has a visibly bimodal norm distribution, a bulk, a gap, and a small
@@ -223,7 +227,7 @@ res.plot()          # matplotlib Figure
 
 <br>
 
-<img src="docs/panels.png" alt="All panels for a single model" width="100%">
+<img src="https://raw.githubusercontent.com/MikeDegany/vit-xray/main/docs/panels.png" alt="All panels for a single model" width="100%">
 
 </details>
 
@@ -243,7 +247,11 @@ looking-inside, use these instead, complementary, and deliberately not reimpleme
 
 ## 🔁 Reproducing the figures
 
+The gallery config lives in the repo, so this one needs a checkout:
+
 ```bash
+git clone https://github.com/MikeDegany/vit-xray && cd vit-xray
+pip install -e ".[dev]"
 vit-xray --gallery configs/gallery.yaml
 ```
 

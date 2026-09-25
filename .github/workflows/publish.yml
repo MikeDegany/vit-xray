@@ -1,0 +1,41 @@
+# Publishes to PyPI when a GitHub release is published.
+#
+# Uses PyPI trusted publishing, so there is no API token stored anywhere: PyPI trusts this
+# exact workflow file in this exact repo. Set it up once at
+# https://pypi.org/manage/account/publishing/ before the first release.
+
+name: publish
+
+on:
+  release:
+    types: [published]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - run: python -m pip install build twine
+      - run: python -m build
+      # Catches a README that PyPI would refuse to render before anything is uploaded.
+      - run: python -m twine check --strict dist/*
+      - uses: actions/upload-artifact@v4
+        with:
+          name: dist
+          path: dist/
+
+  publish:
+    needs: build
+    runs-on: ubuntu-latest
+    environment: pypi
+    permissions:
+      id-token: write  # this is what trusted publishing authenticates with
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          name: dist
+          path: dist/
+      - uses: pypa/gh-action-pypi-publish@release/v1

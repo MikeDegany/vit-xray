@@ -356,8 +356,8 @@ def inspect(image, model=DEFAULT_MODEL, device="auto", layer=-1, pca_foreground=
 
     Args:
         image: path to an image file.
-        model: timm model name. Defaults to DINOv2 ViT-g/14, the smallest DINOv2 that
-            still shows the artifact phenomenon at the final block.
+        model: timm model name. Defaults to OpenCLIP ViT-B/16, small enough for a laptop.
+            DINOv2 ViT-g/14 (SHOWCASE_MODEL) gives the clearest picture at 4.3 GB.
         device: "auto", "cpu" or "cuda".
         layer: which block to read, as an index into model.blocks. -1 is the final block.
         pca_foreground: mask the PCA panel's background using the sign of PC1.
